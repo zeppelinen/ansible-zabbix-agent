@@ -1,0 +1,3 @@
+[submodule "plugins/libvirt"]
+	path = plugins/libvirt
+	url = git@github.com:zeppelinen/zabbix-kvm-res.git
