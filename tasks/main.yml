@@ -1,7 +1,7 @@
 ---
 # tasks file for wdijkerman.zabbix
 
-- name: "Check ansible version" 
+- name: "Check ansible version"
   fail:
     msg: "This playbook requires Ansible 2.5.0 or greater."
   when:
@@ -145,7 +145,7 @@
     - init
 
 - name: "Setup Zabbix agent log directory"
-  file: 
+  file:
     path: "/var/log/zabbix"
     state: directory
     owner: zabbix
