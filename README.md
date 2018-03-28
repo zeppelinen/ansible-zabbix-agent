@@ -33,7 +33,7 @@ Table of Contents
 
 Build Status:
 
-[![Build Status](https://travis-ci.org/dj-wasabi/ansible-zabbix-agent.svg?branch=master)](https://travis-ci.org/dj-wasabi/ansible-zabbix-agent)
+[![Build Status](https://travis-ci.org/zeppelinen/ansible-zabbix-agent.svg?branch=master)](https://travis-ci.org/zeppelinen/ansible-zabbix-agent)
 
 This is an role for installing and maintaining the zabbix-agent.
 
