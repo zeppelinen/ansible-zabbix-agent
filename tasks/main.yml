@@ -1,6 +1,12 @@
 ---
 # tasks file for wdijkerman.zabbix
 
+- name: "Check ansible version" 
+  fail:
+    msg: "This playbook requires Ansible 2.5.0 or greater."
+  when:
+    - ansible_version is version('2.5.0', '<')
+
 - name: "Fix facts for linuxmint - distribution release"
   set_fact:
     ansible_distribution_release: xenial
@@ -138,6 +144,40 @@
     - config
     - init
 
+- name: "Setup Zabbix agent log directory"
+  file: 
+    path: "/var/log/zabbix"
+    state: directory
+    owner: zabbix
+    group: zabbix
+    mode: 0750
+    recurse: yes
+  become: yes
+  tags: config
+  notify: restart zabbix-agent
+
+- name: "Additional config symlink"
+  file:
+    src: "/etc/zabbix/{{ zabbix_agent_conf }}"
+    dest: "/etc/zabbix_agentd.conf"
+    state: link
+    force: true
+  tags:
+    - zabbix-agent
+    - config
+    - init
+
+- name: "Create include dir zabbix-agent"
+  file:
+    path: "{{ zabbix_agent_include }}"
+    owner: root
+    group: root
+    state: directory
+  become: yes
+  tags:
+    - config
+    - include
+
 - name: "Create directory for PSK file if not exist."
   file:
     path: "{{ zabbix_agent_tlspskfile | dirname }}"
@@ -147,6 +187,25 @@
   when:
     - zabbix_agent_tlspskfile is defined
     - zabbix_agent_tlspskfile != ''
+
+- name: "Set params of host TLS accept"
+  set_fact:
+    zabbix_host_tlsaccept: 1
+  when:
+    - zabbix_agent_tlsaccept == "unencrypted"
+
+- name: "Set params of host TLS accept"
+  set_fact:
+    zabbix_host_tlsaccept: 2
+  when:
+    - zabbix_agent_tlsaccept == "psk"
+
+- name: "Set params of host TLS accept"
+  set_fact:
+    zabbix_host_tlsaccept: 4
+  when:
+    - zabbix_agent_tlsaccept == "cert"
+
 
 - name: "Place TLS PSK File"
   copy:
@@ -193,6 +252,7 @@
     - init
     - service
 
+
 - name: "Create hostgroups"
   local_action:
     module: zabbix_group
@@ -228,6 +288,33 @@
   changed_when: false
   tags:
     - api
+
+- name: "Update host TLS settings"
+  local_action:
+    module: zabbix_host
+    server_url: "{{ zabbix_url }}"
+    login_user: "{{ zabbix_api_user }}"
+    login_password: "{{ zabbix_api_pass }}"
+    host_name: "{{ zabbix_agent_hostname }}"
+    host_groups: "{{ zabbix_host_groups }}"
+    link_templates: "{{ zabbix_link_templates }}"
+    status: "{{ zabbix_host_status }}"
+    state: "{{ zabbix_create_host }}"
+    proxy: "{{ zabbix_proxy }}"
+    inventory_mode: "{{ zabbix_inventory_mode }}"
+    interfaces: "{{ zabbix_agent_interfaces }}"
+    visible_name: "{{ zabbix_visible_hostname|default(zabbix_agent_hostname) }}"
+    tls_accept: "{{zabbix_host_tlsaccept}}"
+    tls_psk: "{{zabbix_agent_tlspsk_secret}}"
+    tls_psk_identity: "{{zabbix_agent_tlspskidentity}}"
+  when:
+    - zabbix_api_create_hosts
+    - zabbix_agent_tlsconnect is defined
+  become: no
+  changed_when: false
+  tags:
+    - api
+
 
 - name: "Updating host configuration with macros"
   local_action:
