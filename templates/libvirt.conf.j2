@@ -1,0 +1,11 @@
+UserParameter=custom.kvm.pool.discover,{{ zabbix_agent_script_path }}/zabbix-kvm-res.py --resource pool --action list
+UserParameter=custom.kvm.pool.size[*],{{ zabbix_agent_script_path }}/zabbix-kvm-res.py --resource pool --action $1 --pool $2
+UserParameter=custom.kvm.pool.active[*],{{ zabbix_agent_script_path }}/zabbix-kvm-res.py --resource pool --action active --pool $1
+UserParameter=custom.kvm.pool.uuid[*],{{ zabbix_agent_script_path }}/zabbix-kvm-res.py --resource pool --action UUID --pool $1
+UserParameter=custom.kvm.net.discover,{{ zabbix_agent_script_path }}/zabbix-kvm-res.py --resource net --action list
+UserParameter=custom.kvm.net.active[*],{{ zabbix_agent_script_path }}/zabbix-kvm-res.py --resource net --action active --net $1
+UserParameter=custom.kvm.net.uuid[*],{{ zabbix_agent_script_path }}/zabbix-kvm-res.py --resource net --action UUID --net $1
+UserParameter=custom.kvm.domain.discover,{{ zabbix_agent_script_path }}/zabbix-kvm-res.py --resource domain --action list
+UserParameter=custom.kvm.domain.active[*],{{ zabbix_agent_script_path }}/zabbix-kvm-res.py --resource domain --action active --domain $1
+UserParameter=custom.kvm.domain.uuid[*],{{ zabbix_agent_script_path }}/zabbix-kvm-res.py --resource domain --action UUID --domain $1
+

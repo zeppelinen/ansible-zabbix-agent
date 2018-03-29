@@ -81,6 +81,8 @@ zabbix_agent_unsafeuserparameters: 0
 zabbix_agent_userparameter:
 zabbix_agent_loadmodulepath: ${libdir}/modules
 zabbix_agent_loadmodule:
+zabbix_agent_script_path: "{{ zabbix_agent_include }}/scripts"
+zabbix_agent_libvirt: false
 
 # TLS settings
 zabbix_agent_tlsconnect:

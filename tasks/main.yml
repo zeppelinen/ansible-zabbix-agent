@@ -178,6 +178,17 @@
     - config
     - include
 
+- name: "Create scripts dir zabbix-agent"
+  file:
+    path: "{{ zabbix_agent_script_path }}"
+    owner: root
+    group: zabbix
+    state: directory
+    mode: 0750
+  become: yes
+  tags:
+    - plugins
+
 - name: "Create directory for PSK file if not exist."
   file:
     path: "{{ zabbix_agent_tlspskfile | dirname }}"
@@ -242,6 +253,10 @@
   become: yes
   when: zabbix_agent_firewall_enable
 
+- name: "Include libvirt monitoring plugin"
+  include: "libvirt.yml"
+  when: zabbix_agent_libvirt
+ 
 - name: "Make sure the zabbix-agent service is running"
   service:
     name: "{{ zabbix_agent_service }}"
@@ -251,7 +266,6 @@
   tags:
     - init
     - service
-
 
 - name: "Create hostgroups"
   local_action:

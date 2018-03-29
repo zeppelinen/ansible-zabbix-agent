@@ -1,0 +1,25 @@
+---
+- name: "Checking libvirt support"
+  fail:
+    msg: "Only RedHat family is supported at the moment"
+  when:
+    - ansible_os_family != 'RedHat'
+
+- name: "Installing libvirt checker"
+  copy:
+    src: zabbix-kvm-res.py
+    dest: "{{ zabbix_agent_script_path }}/zabbix-kvm-res.py"
+    owner: root
+    group: root
+    mode: 0755
+  become: yes
+
+- name: "Installing libvrit agent config"
+  template:
+    src: libvirt.conf.j2
+    dest: "{{ zabbix_agent_include }}/libvirt.conf"
+    owner: root
+    group: zabbix
+    mode: 0755
+  notify: restart zabbix-agent
+  become: yes
