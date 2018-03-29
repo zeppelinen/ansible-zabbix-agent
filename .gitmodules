@@ -4,3 +4,6 @@
 [submodule "files/plugin_src/libzbxpgsql"]
 	path = files/plugin_src/libzbxpgsql
 	url = https://github.com/cavaliercoder/libzbxpgsql.git
+[submodule "files/plugin_src/zabbix-extensions"]
+	path = files/plugin_src/zabbix-extensions
+	url = https://github.com/lesovsky/zabbix-extensions.git

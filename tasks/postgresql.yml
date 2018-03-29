@@ -1,9 +1,9 @@
 ---
 
-- name: "Installing libvrit agent config"
+- name: "Installing postgresql config"
   template:
-    src: libvirt.conf.j2
-    dest: "{{ zabbix_agent_include }}/libvirt.conf"
+    src: postgresql.conf.j2
+    dest: "{{ zabbix_agent_include }}/postgresql.conf"
     owner: root
     group: zabbix
     mode: 0755
