@@ -256,7 +256,7 @@
 - name: "Include libvirt monitoring plugin"
   include: "libvirt.yml"
   when: zabbix_agent_libvirt
- 
+
 - name: "Make sure the zabbix-agent service is running"
   service:
     name: "{{ zabbix_agent_service }}"
