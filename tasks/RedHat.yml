@@ -43,6 +43,9 @@
     - init
     - zabbix-agent
 
+- name: "Include shared installation tasks"
+  include: plugin_helpers.yml
+
 - name: "Install policycoreutils-python"
   yum:
     name: policycoreutils-python
