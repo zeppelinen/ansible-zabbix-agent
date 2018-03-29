@@ -1,10 +1,4 @@
 ---
-- name: "Checking libvirt support"
-  fail:
-    msg: "Only RedHat family is supported at the moment"
-  when:
-    - ansible_os_family != 'RedHat'
-
 - name: "Installing libvirt checker"
   copy:
     src: zabbix-kvm-res.py
