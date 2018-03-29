@@ -1,3 +1,6 @@
 [submodule "plugins/libvirt"]
 	path = files/plugin_src/libvirt
 	url = https://github.com/zeppelinen/zabbix-kvm-res.git
+[submodule "files/plugin_src/libzbxpgsql"]
+	path = files/plugin_src/libzbxpgsql
+	url = https://github.com/cavaliercoder/libzbxpgsql.git

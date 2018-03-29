@@ -57,11 +57,12 @@
     - zabbix-agent
 
 - name: "Installing libvirt dependencies"
-  yum:
-    name: libvirt-python
+  package:
+    pkg: libvirt-python
     state: present
   become: yes
-  when: zabbix_agent_libvirt
+  when:
+    - zabbix_agent_libvirt
 
 - name: "RedHat | Enable the service"
   service:
