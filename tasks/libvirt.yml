@@ -8,7 +8,7 @@
     mode: 0755
   become: yes
 
-- name: "Installing libvrit agent config"
+- name: "Installing libvirt agent config"
   template:
     src: libvirt.conf.j2
     dest: "{{ zabbix_agent_include }}/libvirt.conf"
