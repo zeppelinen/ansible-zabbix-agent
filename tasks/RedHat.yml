@@ -64,6 +64,17 @@
   when:
     - zabbix_agent_libvirt
 
+- name: "Installing libzbxpgsql dependencies"
+  package:
+    pkg: "{{ item }}"
+    state: present
+  become: yes
+  with_items:
+    - libconfig
+    - postgresql-libs
+  when:
+    - zabbix_agent_postgresql
+
 - name: "RedHat | Enable the service"
   service:
     name: "{{ zabbix_agent_service }}"

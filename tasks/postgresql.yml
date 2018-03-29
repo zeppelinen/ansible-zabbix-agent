@@ -1,0 +1,11 @@
+---
+
+- name: "Installing libvrit agent config"
+  template:
+    src: libvirt.conf.j2
+    dest: "{{ zabbix_agent_include }}/libvirt.conf"
+    owner: root
+    group: zabbix
+    mode: 0755
+  notify: restart zabbix-agent
+  become: yes

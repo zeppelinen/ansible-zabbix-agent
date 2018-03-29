@@ -1,0 +1,23 @@
+---
+- name: "Get exact version of Zabbix agent installed"
+  shell: "zabbix_agentd -V | head -n1 | awk {'print $4'}"
+  register: zabbix_agent_installed_version
+
+- name: "Define zabbix agent generation"
+  set_fact:
+    zabbix_agent_generation: "3.0"
+  when:
+    - zabbix_agent_installed_version is version ('3.0.0', '>=')
+    - zabbix_agent_installed_version is version ('3.2.0', '<=')
+
+- name: "Define zabbix agent generation"
+  set_fact:
+    zabbix_agent_generation: "3.2"
+  when:
+    - zabbix_agent_installed_version is version ('3.2.0', '>=')
+
+- name: "Define zabbix agent generation"
+  set_fact:
+    zabbix_agent_generation: "2.2"
+  when:
+    - zabbix_agent_installed_version is version ('3.0.0', '<')
