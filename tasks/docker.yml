@@ -18,7 +18,20 @@
   notify: restart zabbix-agent
   become: yes
 
+- name: "Getting list of user groups"
+  shell: groups | tr -s " " "\012"
+  register: system_groups
+  tags:
+    - skip_ansible_lint
+
+- name: "Checking docker prerequisites"
+  fail: 
+    msg: "Can't continue without docker group present"
+  when: '"zabbix" not in system_groups.stdout_lines'
+
 - name: Adding zabbix to group docker
-  user: name=zabbix
-        groups=docker
-        append=yes
+  user: 
+    name: zabbix
+    groups: docker
+    append: yes
+  become: yes
