@@ -39,6 +39,7 @@
     state: "{{ zabbix_agent_package_state }}"
   become: yes
   with_items: "{{ zabbix_agent_packages }}"
+  register: zabbix_agent_installed
   tags:
     - init
     - zabbix-agent
