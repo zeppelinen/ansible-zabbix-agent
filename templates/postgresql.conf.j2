@@ -15,59 +15,59 @@ UserParameter=pgsql.connections[*],PGPASSWORD=$1 psql -qAtX $2 -c "SELECT row_to
 UserParameter=pgsql.connections.prepared[*],PGPASSWORD=$1 psql -qAtX $2 -c "select count(*) from pg_prepared_xacts"
 
 # Size of database, table or indexes of specified table
-UserParameter=pgsql.db.size[*],PGPASSWORD=$1 psql -qAtX $2 -c "select pg_database_size('$2')"
-UserParameter=pgsql.table.size[*],PGPASSWORD=$1 psql -qAtX $2 -c "select pg_relation_size('$2')"
-UserParameter=pgsql.index.size[*],PGPASSWORD=$1 psql -qAtX $2 -c "select pg_total_relation_size('$2') - pg_relation_size('$2')"
+UserParameter=pgsql.db.size[*],PGPASSWORD=$1 psql -qAtX $2 -c "select pg_database_size('$3')"
+UserParameter=pgsql.table.size[*],PGPASSWORD=$1 psql -qAtX $2 -c "select pg_relation_size('$3')"
+UserParameter=pgsql.index.size[*],PGPASSWORD=$1 psql -qAtX $2 -c "select pg_total_relation_size('$3') - pg_relation_size('$2')"
 
 # Summary database statistics
 UserParameter=pgsql.dbstat.sum[*],PGPASSWORD=$1 psql -qAtX $2 -c "SELECT row_to_json(j) FROM (SELECT sum(numbackends) AS numbackends, sum(xact_commit) AS xact_commit, sum(xact_rollback) AS xact_rollback, sum(blks_read) AS blks_read, sum(blks_hit) AS blks_hit, sum(tup_returned) AS tup_returned, sum(tup_fetched) AS tup_fetched, sum(tup_inserted) AS tup_inserted, sum(tup_updated) AS tup_updated, sum(tup_deleted) AS tup_deleted, sum(conflicts) AS conflicts, sum(temp_files) AS temp_files, sum(temp_bytes) AS temp_bytes, sum(deadlocks) AS deadlocks FROM pg_stat_database) AS j"
 
 # Specified database statistics
-UserParameter=pgsql.dbstat.numbackends[*],PGPASSWORD=$1 psql -qAtX $2 -c "select numbackends from pg_stat_database where datname = '$2'"
-UserParameter=pgsql.dbstat.xact_commit[*],PGPASSWORD=$1 psql -qAtX $2 -c "select xact_commit from pg_stat_database where datname = '$2'"
-UserParameter=pgsql.dbstat.xact_rollback[*],PGPASSWORD=$1 psql -qAtX $2 -c "select xact_rollback from pg_stat_database where datname = '$2'"
-UserParameter=pgsql.dbstat.blks_read[*],PGPASSWORD=$1 psql -qAtX $2 -c "select blks_read from pg_stat_database where datname = '$2'"
-UserParameter=pgsql.dbstat.blks_hit[*],PGPASSWORD=$1 psql -qAtX $2 -c "select blks_hit from pg_stat_database where datname = '$2'"
-UserParameter=pgsql.dbstat.tup_returned[*],PGPASSWORD=$1 psql -qAtX $2 -c "select tup_returned from pg_stat_database where datname = '$2'"
-UserParameter=pgsql.dbstat.tup_fetched[*],PGPASSWORD=$1 psql -qAtX $2 -c "select tup_fetched from pg_stat_database where datname = '$2'"
-UserParameter=pgsql.dbstat.tup_inserted[*],PGPASSWORD=$1 psql -qAtX $2 -c "select tup_inserted from pg_stat_database where datname = '$2'"
-UserParameter=pgsql.dbstat.tup_updated[*],PGPASSWORD=$1 psql -qAtX $2 -c "select tup_updated from pg_stat_database where datname = '$2'"
-UserParameter=pgsql.dbstat.tup_deleted[*],PGPASSWORD=$1 psql -qAtX $2 -c "select tup_deleted from pg_stat_database where datname = '$2'"
-UserParameter=pgsql.dbstat.conflicts[*],PGPASSWORD=$1 psql -qAtX $2 -c "select conflicts from pg_stat_database where datname = '$2'"
-UserParameter=pgsql.dbstat.temp_files[*],PGPASSWORD=$1 psql -qAtX $2 -c "select temp_files from pg_stat_database where datname = '$2'"
-UserParameter=pgsql.dbstat.temp_bytes[*],PGPASSWORD=$1 psql -qAtX $2 -c "select temp_bytes from pg_stat_database where datname = '$2'"
-UserParameter=pgsql.dbstat.deadlocks[*],PGPASSWORD=$1 psql -qAtX $2 -c "select deadlocks from pg_stat_database where datname = '$2'"
+UserParameter=pgsql.dbstat.numbackends[*],PGPASSWORD=$1 psql -qAtX $2 -c "select numbackends from pg_stat_database where datname = '$3'"
+UserParameter=pgsql.dbstat.xact_commit[*],PGPASSWORD=$1 psql -qAtX $2 -c "select xact_commit from pg_stat_database where datname = '$3'"
+UserParameter=pgsql.dbstat.xact_rollback[*],PGPASSWORD=$1 psql -qAtX $2 -c "select xact_rollback from pg_stat_database where datname = '$3'"
+UserParameter=pgsql.dbstat.blks_read[*],PGPASSWORD=$1 psql -qAtX $2 -c "select blks_read from pg_stat_database where datname = '$3'"
+UserParameter=pgsql.dbstat.blks_hit[*],PGPASSWORD=$1 psql -qAtX $2 -c "select blks_hit from pg_stat_database where datname = '$3'"
+UserParameter=pgsql.dbstat.tup_returned[*],PGPASSWORD=$1 psql -qAtX $2 -c "select tup_returned from pg_stat_database where datname = '$3'"
+UserParameter=pgsql.dbstat.tup_fetched[*],PGPASSWORD=$1 psql -qAtX $2 -c "select tup_fetched from pg_stat_database where datname = '$3'"
+UserParameter=pgsql.dbstat.tup_inserted[*],PGPASSWORD=$1 psql -qAtX $2 -c "select tup_inserted from pg_stat_database where datname = '$3'"
+UserParameter=pgsql.dbstat.tup_updated[*],PGPASSWORD=$1 psql -qAtX $2 -c "select tup_updated from pg_stat_database where datname = '$3'"
+UserParameter=pgsql.dbstat.tup_deleted[*],PGPASSWORD=$1 psql -qAtX $2 -c "select tup_deleted from pg_stat_database where datname = '$3'"
+UserParameter=pgsql.dbstat.conflicts[*],PGPASSWORD=$1 psql -qAtX $2 -c "select conflicts from pg_stat_database where datname = '$3'"
+UserParameter=pgsql.dbstat.temp_files[*],PGPASSWORD=$1 psql -qAtX $2 -c "select temp_files from pg_stat_database where datname = '$3'"
+UserParameter=pgsql.dbstat.temp_bytes[*],PGPASSWORD=$1 psql -qAtX $2 -c "select temp_bytes from pg_stat_database where datname = '$3'"
+UserParameter=pgsql.dbstat.deadlocks[*],PGPASSWORD=$1 psql -qAtX $2 -c "select deadlocks from pg_stat_database where datname = '$3'"
 
 # Table statistics (pg_stat_user_tables and pg_statio_user_tables)
-UserParameter=pgsql.table.stat.heap_blks_read[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(heap_blks_read,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.heap_blks_hit[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(heap_blks_hit,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.idx_blks_read[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(idx_blks_read,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.idx_blks_hit[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(idx_blks_hit,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.toast_blks_read[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(toast_blks_read,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.toast_blks_hit[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(toast_blks_hit,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.tidx_blks_read[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(tidx_blks_read,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.tidx_blks_hit[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(tidx_blks_hit,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$2'"
+UserParameter=pgsql.table.stat.heap_blks_read[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(heap_blks_read,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.heap_blks_hit[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(heap_blks_hit,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.idx_blks_read[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(idx_blks_read,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.idx_blks_hit[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(idx_blks_hit,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.toast_blks_read[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(toast_blks_read,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.toast_blks_hit[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(toast_blks_hit,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.tidx_blks_read[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(tidx_blks_read,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.tidx_blks_hit[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(tidx_blks_hit,0) from pg_statio_user_tables where (schemaname || '.' || relname) = '$3'"
 
-UserParameter=pgsql.table.stat.seq_scan[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(seq_scan,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.seq_tup_read[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(seq_tup_read,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.idx_scan[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(idx_scan,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.idx_tup_fetch[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(idx_tup_fetch,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.n_tup_ins[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(n_tup_ins,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.n_tup_del[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(n_tup_del,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.n_tup_upd[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(n_tup_upd,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.n_tup_hot_upd[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(n_tup_hot_upd,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.n_live_tup[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(n_live_tup,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.n_dead_tup[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(n_dead_tup,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.vacuum_count[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(vacuum_count,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.autovacuum_count[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(autovacuum_count,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.analyze_count[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(analyze_count,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
-UserParameter=pgsql.table.stat.autoanalyze_count[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(autoanalyze_count,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$2'"
+UserParameter=pgsql.table.stat.seq_scan[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(seq_scan,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.seq_tup_read[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(seq_tup_read,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.idx_scan[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(idx_scan,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.idx_tup_fetch[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(idx_tup_fetch,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.n_tup_ins[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(n_tup_ins,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.n_tup_del[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(n_tup_del,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.n_tup_upd[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(n_tup_upd,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.n_tup_hot_upd[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(n_tup_hot_upd,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.n_live_tup[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(n_live_tup,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.n_dead_tup[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(n_dead_tup,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.vacuum_count[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(vacuum_count,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.autovacuum_count[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(autovacuum_count,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.analyze_count[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(analyze_count,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
+UserParameter=pgsql.table.stat.autoanalyze_count[*],PGPASSWORD=$1 psql -qAtX $2 -c "select coalesce(autoanalyze_count,0) from pg_stat_user_tables where (schemaname || '.' || relname) = '$3'"
 
 
 # Streaming replication
 UserParameter=pgsql.streaming.count[*],PGPASSWORD=$1 psql -qAtX $2 -c "select count(*) from pg_stat_replication"
 UserParameter=pgsql.streaming.state[*],PGPASSWORD=$1 psql -qAtX $2 -c "select pg_is_in_recovery()"
-UserParameter=pgsql.streaming.lag.bytes[*],PGPASSWORD=$1 psql -qAtX $2 -c "select greatest(0,pg_xlog_location_diff(pg_current_xlog_location(), replay_location)) from pg_stat_replication where client_addr = '$2'"
+UserParameter=pgsql.streaming.lag.bytes[*],PGPASSWORD=$1 psql -qAtX $2 -c "select greatest(0,pg_xlog_location_diff(pg_current_xlog_location(), replay_location)) from pg_stat_replication where client_addr = '$3'"
 UserParameter=pgsql.streaming.lag.seconds[*],PGPASSWORD=$1 psql -qAtX -h $2 $2 -c "SELECT CASE WHEN pg_last_xlog_receive_location() = pg_last_xlog_replay_location() THEN 0 ELSE EXTRACT (EPOCH FROM now() - pg_last_xact_replay_timestamp()) END"
 
 # Transactions
@@ -82,11 +82,11 @@ UserParameter=pgsql.pgstatstatements.avg_query_time[*],PGPASSWORD=$1 psql -qAtX 
 # Others
 UserParameter=pgsql.table.tuples[*],PGPASSWORD=$1 psql -qAtX $2 -c "select count(*) from $3"
 UserParameter=pgsql.setting[*],PGPASSWORD=$1 psql -qAtX $2 -c "select current_setting('$3')"
-UserParameter=pgsql.trigger[*],PGPASSWORD=$1 psql -qAtX $2 -c "select count(*) from pg_trigger where tgenabled='O' and tgname='$2'"
+UserParameter=pgsql.trigger[*],PGPASSWORD=$1 psql -qAtX $2 -c "select count(*) from pg_trigger where tgenabled='O' and tgname='$3'"
 UserParameter=pgsql.wal.write[*],PGPASSWORD=$1 psql -qAtX $2 -c "select pg_xlog_location_diff(pg_current_xlog_location(),'0/00000000')"
 UserParameter=pgsql.wal.count[*],PGPASSWORD=$1 psql -qAtX $2 -c "select count(*) from pg_ls_dir('pg_xlog')"
 
 # Discovery
-UserParameter=pgsql.db.discovery[*],/bin/echo -n '{"data":['; for db in $(PGPASSWORD=$1 psql -qAtX $2 -c "select datname from pg_database where not datistemplate and datallowconn and datname!='postgres'"); do /bin/echo -n "{\"{#DBNAME}\": \"$db\"},"; done |sed -e 's:,$::'; /bin/echo -n ']}'
-UserParameter=pgsql.table.discovery[*],/bin/echo -n '{"data":['; for table in $(PGPASSWORD=$1 psql -qAtX -F. $2 -c "select n.nspname,c.relname from pg_catalog.pg_class c left join pg_catalog.pg_namespace n on n.oid = c.relnamespace where c.relkind in ('r','s','') and n.nspname not in ('^pg_toast','information_schema','pg_catalog')"); do /bin/echo -n "{\"{#TABLENAME}\": \"$table\"},"; done |sed -e 's:\},$:\}:'; /bin/echo -n ']}'
-UserParameter=pgsql.streaming.discovery[*],/bin/echo -n '{"data":['; for replica in $(PGPASSWORD=$1 psql -qAtX $2 -c "select client_addr from pg_stat_replication"); do /bin/echo -n "{\"{#HOTSTANDBY}\": \"$replica\"},"; done |sed -e 's:,$::'; /bin/echo -n ']}'
+UserParameter=pgsql.db.discovery[*],export PGPASSWORD=$1; /bin/echo -n '{"data":['; for db in $( psql -qAtX $2 -c "select datname from pg_database where not datistemplate and datallowconn and datname!='postgres'"); do /bin/echo -n "{\"{#DBNAME}\": \"$db\"},"; done |sed -e 's:,$::'; /bin/echo -n ']}'
+UserParameter=pgsql.table.discovery[*],export PGPASSWORD=$1; /bin/echo -n '{"data":['; for table in $(psql -qAtX -F. $2 -c "select n.nspname,c.relname from pg_catalog.pg_class c left join pg_catalog.pg_namespace n on n.oid = c.relnamespace where c.relkind in ('r','s','') and n.nspname not in ('^pg_toast','information_schema','pg_catalog')"); do /bin/echo -n "{\"{#TABLENAME}\": \"$table\"},"; done |sed -e 's:\},$:\}:'; /bin/echo -n ']}'
+UserParameter=pgsql.streaming.discovery[*],export PGPASSWORD=$1; /bin/echo -n '{"data":['; for replica in $( psql -qAtX $2 -c "select client_addr from pg_stat_replication"); do /bin/echo -n "{\"{#HOTSTANDBY}\": \"$replica\"},"; done |sed -e 's:,$::'; /bin/echo -n ']}'
