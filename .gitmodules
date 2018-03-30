@@ -13,3 +13,6 @@
 [submodule "files/plugin_src/diskio"]
 	path = files/plugin_src/diskio
 	url = https://github.com/grundic/zabbix-disk-performance.git
+[submodule "files/plugin_src/docker"]
+	path = files/plugin_src/docker
+	url = https://github.com/dimuskin/ax-zabbix-docker.git
