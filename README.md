@@ -18,6 +18,7 @@ Table of Contents
   * [Main variables](#main-variables)
   * [Zabbix 3.0](#zabbix-30)
   * [Zabbix API variables](#zabbix-api-variables)
+  * [Zabbix Plugin variables](#zabbix-plugin-variables)
 - [Dependencies](#dependencies)
 - [Example Playbook](#example-playbook)
   * [agent_interfaces](#agent-interfaces)
@@ -226,6 +227,13 @@ These variables needs to be changed/overriden when you want to make use of the z
 * `zabbix_inventory_mode`: Configure Zabbix inventory mode. Needed for building inventory data, manually when configuring a host or automatically by using some automatic population options. This has to be set to `automatic` if you want to make automatically building inventory data.
 
 * `zabbix_visible_hostname` : Configure Zabbix visible name inside zabbix web UI for the node.
+
+## [Zabbix Plugin variables]
+These variables needs to be changed/overriden when you want to enable/disable automatic monitoring plugins and scripts installation.
+
+* `zabbix_agent_postgresql`: Enable PostgreSQL plugin. Corresponding Zabbix server reference template is `files/zabbix_server_templates/postgresql.xml`
+
+* `zabbix_agent_libvirt`: Enable libvirt(KVM) plugin. Corresponding Zabbix server reference template is `files/zabbix_server_templates/libvirt.xml`
      
 ## Other variables
 
