@@ -25,12 +25,12 @@
     - skip_ansible_lint
 
 - name: "Checking docker prerequisites"
-  fail: 
+  fail:
     msg: "Can't continue without docker group present"
   when: '"zabbix" not in system_groups.stdout_lines'
 
 - name: Adding zabbix to group docker
-  user: 
+  user:
     name: zabbix
     groups: docker
     append: yes
