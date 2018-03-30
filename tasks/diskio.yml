@@ -1,0 +1,19 @@
+---
+- name: "Installing diskio LLD script"
+  copy:
+    src: lld-disks.py
+    dest: "{{ zabbix_agent_script_path }}/lld-disks.py"
+    owner: root
+    group: root
+    mode: 0755
+  become: yes
+
+- name: "Installing diskio plugin config"
+  template:
+    src: diskio.conf.j2
+    dest: "{{ zabbix_agent_include }}/diskio.conf"
+    owner: root
+    group: zabbix
+    mode: 0755
+  notify: restart zabbix-agent
+  become: yes

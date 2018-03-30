@@ -262,6 +262,10 @@
   include: "nginx.yml"
   when: zabbix_agent_nginx
 
+- name: "Include diskio monitoring plugin"
+  include: "diskio.yml"
+  when: zabbix_agent_nginx
+
 - name: "Make sure the zabbix-agent service is running"
   service:
     name: "{{ zabbix_agent_service }}"

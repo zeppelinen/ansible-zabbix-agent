@@ -84,6 +84,7 @@ zabbix_agent_loadmodule:
 zabbix_agent_script_path: "{{ zabbix_agent_include }}/scripts"
 zabbix_agent_libvirt: false
 zabbix_agent_nginx: false
+zabbix_agent_diskio: false
 zabbix_agent_postgresql: false
 
 # TLS settings
