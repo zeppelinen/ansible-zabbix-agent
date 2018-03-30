@@ -106,7 +106,7 @@
 
 - name: "Installing libvirt dependencies"
   apt:
-    name: libvirt-python
+    name: python-libvirt
     state: present
     update_cache: yes
     cache_valid_time: 0
