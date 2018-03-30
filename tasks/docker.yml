@@ -17,3 +17,8 @@
     mode: 0755
   notify: restart zabbix-agent
   become: yes
+
+- name: Adding zabbix to group docker
+  user: name=zabbix
+        groups=docker
+        append=yes
