@@ -19,7 +19,7 @@
   become: yes
 
 - name: "Getting list of user groups"
-  shell: groups | tr -s " " "\012"
+  shell: "awk -F: '{print $1}' /etc/group"
   register: system_groups
   tags:
     - skip_ansible_lint
