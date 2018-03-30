@@ -234,6 +234,8 @@ These variables needs to be changed/overriden when you want to enable/disable au
 * `zabbix_agent_postgresql`: Enable PostgreSQL plugin. Corresponding Zabbix server reference template is `files/zabbix_server_templates/postgresql.xml`
 
 * `zabbix_agent_libvirt`: Enable libvirt(KVM) plugin. Corresponding Zabbix server reference template is `files/zabbix_server_templates/libvirt.xml`
+
+* `zabbix_agent_nginx`: Enable nginx plugin. Corresponding Zabbix server reference template is `files/zabbix_server_templates/nginx.xml`. Default: `false`
      
 ## Other variables
 
