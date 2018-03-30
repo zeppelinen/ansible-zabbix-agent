@@ -86,6 +86,7 @@ zabbix_agent_libvirt: false
 zabbix_agent_nginx: false
 zabbix_agent_diskio: false
 zabbix_agent_postgresql: false
+zabbix_agent_docker: false
 
 # TLS settings
 zabbix_agent_tlsconnect:

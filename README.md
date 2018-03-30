@@ -239,6 +239,8 @@ These variables needs to be changed/overriden when you want to enable/disable au
 
 * `zabbix_agent_diskio`: Enable diskio plugin. Corresponding Zabbix server reference template is `files/zabbix_server_templates/diskio.xml`. Default: `false`
      
+* `zabbix_agent_docker`: Enable docker plugin. Corresponding Zabbix server reference template is `files/zabbix_server_templates/docker.xml`. Default: `false`
+     
 ## Other variables
 
 * `zabbix_agent_firewall_enable`: If IPtables needs to be updated by opening an TCP port for port configured in `zabbix_agent_listenport`.

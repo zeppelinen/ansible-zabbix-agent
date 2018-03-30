@@ -1,0 +1,19 @@
+---
+- name: "Installing docker plugin"
+  copy:
+    src: docker.py
+    dest: "{{ zabbix_agent_script_path }}/docker.py"
+    owner: root
+    group: root
+    mode: 0755
+  become: yes
+
+- name: "Installing docker plugin config"
+  template:
+    src: docker.conf.j2
+    dest: "{{ zabbix_agent_include }}/docker.conf"
+    owner: root
+    group: zabbix
+    mode: 0755
+  notify: restart zabbix-agent
+  become: yes

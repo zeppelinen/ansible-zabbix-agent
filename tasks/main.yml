@@ -262,6 +262,10 @@
   include: "nginx.yml"
   when: zabbix_agent_nginx
 
+- name: "Include docker monitoring plugin"
+  include: "docker.yml"
+  when: zabbix_agent_docker
+
 - name: "Include diskio monitoring plugin"
   include: "diskio.yml"
   when: zabbix_agent_nginx
