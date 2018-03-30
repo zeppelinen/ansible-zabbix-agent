@@ -7,3 +7,6 @@
 [submodule "files/plugin_src/zabbix-extensions"]
 	path = files/plugin_src/zabbix-extensions
 	url = https://github.com/lesovsky/zabbix-extensions.git
+[submodule "files/plugin_src/nginx"]
+	path = files/plugin_src/nginx
+	url = https://github.com/sfuerte/zbx-nginx.git
