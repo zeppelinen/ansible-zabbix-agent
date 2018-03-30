@@ -36,4 +36,3 @@
       zabbix_agent_tlspsk_secret: 97defd6bd126d5ba7fa5f296595f82eac905d5eda270207a580ab7c0cb9e8eab
       zabbix_agent_libvirt: true
       zabbix_agent_postgresql: true
-
