@@ -266,9 +266,13 @@
   include: "docker.yml"
   when: zabbix_agent_docker
 
+- name: "Include postgresql monitoring plugin"
+  include: "postgresql.yml"
+  when: zabbix_agent_postgresql
+
 - name: "Include diskio monitoring plugin"
   include: "diskio.yml"
-  when: zabbix_agent_nginx
+  when: zabbix_agent_diskio
 
 - name: "Make sure the zabbix-agent service is running"
   service:
